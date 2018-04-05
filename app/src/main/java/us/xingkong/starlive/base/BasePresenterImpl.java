@@ -10,14 +10,14 @@ public class BasePresenterImpl implements BasePresenter {
     protected CompositeSubscription mSubscriptions;
 
     @Override
-    public void onStart() {
+    public void subscribe() {
         if (mSubscriptions == null) {
             mSubscriptions = new CompositeSubscription();
         }
     }
 
     @Override
-    public void onDestroy() {
+    public void unsubscribe() {
         if (mSubscriptions != null && mSubscriptions.hasSubscriptions()) {
             mSubscriptions.unsubscribe();
             mSubscriptions.clear();

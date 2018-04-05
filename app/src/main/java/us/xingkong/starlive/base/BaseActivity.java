@@ -31,7 +31,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         mPresenter = createPresenter();
         if (mPresenter != null) {
             // 调用Presenter初始化方法
-            mPresenter.onStart();
+            mPresenter.subscribe();
         }
 
         init(savedInstanceState);
@@ -52,7 +52,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         bind.unbind();
         // 销毁Presenter
         if (mPresenter != null) {
-            mPresenter.onDestroy();
+            mPresenter.unsubscribe();
         }
         super.onDestroy();
     }

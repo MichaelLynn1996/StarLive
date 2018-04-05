@@ -69,24 +69,4 @@ public class MainActivity extends BaseActivity<MainContract.Presenter> implement
     public void setPresenter(MainContract.Presenter presenter) {
 
     }
-
-    @Override
-    public void showToast(CharSequence msg) {
-
-    }
-
-    @Override
-    public void showToast(int msgId) {
-
-    }
-
-    @Override
-    public void showLoadingDialog(CharSequence msg) {
-
-    }
-
-    @Override
-    public void hideLoadingDialog() {
-
-    }
 }

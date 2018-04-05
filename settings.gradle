@@ -1,1 +1,1 @@
-include ':app', ':streamsdk', ':vitamio'
+include ':app', ':streamsdk'

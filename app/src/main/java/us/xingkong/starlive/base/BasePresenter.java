@@ -6,7 +6,8 @@ package us.xingkong.starlive.base;
 
 public interface BasePresenter {
 
-    void onStart();
+    void subscribe();
 
-    void onDestroy();
+    void unsubscribe();
+
 }

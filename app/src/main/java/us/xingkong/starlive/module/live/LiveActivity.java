@@ -1,23 +1,25 @@
 package us.xingkong.starlive.module.live;
 
-import android.content.DialogInterface;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
+import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import butterknife.BindView;
-import io.vov.vitamio.LibsChecker;
-import io.vov.vitamio.MediaPlayer;
-import io.vov.vitamio.widget.MediaController;
-import io.vov.vitamio.widget.VideoView;
+import cn.jzvd.JZVideoPlayer;
+import cn.jzvd.JZVideoPlayerStandard;
 import master.flame.danmaku.danmaku.model.android.DanmakuContext;
 import master.flame.danmaku.danmaku.parser.BaseDanmakuParser;
 import master.flame.danmaku.ui.widget.DanmakuView;
+import us.xingkong.starlive.MediaIjkPlayer;
 import us.xingkong.starlive.R;
+import us.xingkong.starlive.adapter.ViewPagerAdapter;
 import us.xingkong.starlive.base.BaseActivity;
 
 /**
@@ -26,14 +28,17 @@ import us.xingkong.starlive.base.BaseActivity;
 
 public class LiveActivity extends BaseActivity<LiveContract.Presenter> implements LiveContract.View {
 
-    @BindView(R.id.video_view)
-    VideoView mVideoView;
-    @BindView(R.id.video_frame)
+    @BindView(R.id.video_texture)
     FrameLayout mVideoFrame;
-    @BindView(R.id.danmaku_view)
+    @BindView(R.id.sv_danmaku)
     DanmakuView mDanmakuView;
+    @BindView(R.id.videoplayer)
+    JZVideoPlayerStandard jzVideoPlayerStandard;
+    @BindView(R.id.view_pager)
+    ViewPager viewPager;
+    @BindView(R.id.tab_layout)
+    TabLayout tabLayout;
 
-    private MediaController mMediaController;
     private BaseDanmakuParser mParser;
     private DanmakuContext mDanmakuContext;
 
@@ -41,62 +46,41 @@ public class LiveActivity extends BaseActivity<LiveContract.Presenter> implement
     private HashMap<Integer, Boolean> overlappingEnablePair;// 设置是否重叠
 
     private static final String STREAM_BASE_URL = "http://live.xingkong.us/hls/";
+    private static final String TAG = "LiveActivity";
+
+    private List<Fragment> list;
+    private ViewPagerAdapter mAdapter;
+    private String[] titles = {"聊天室", "星空", "合作方"};
 
     @Override
     public void setPresenter(LiveContract.Presenter presenter) {
-
-    }
-
-    @Override
-    public void showToast(CharSequence msg) {
-
-    }
-
-    @Override
-    public void showToast(int msgId) {
-
-    }
-
-    @Override
-    public void showLoadingDialog(CharSequence msg) {
-
-    }
-
-    @Override
-    public void hideLoadingDialog() {
-
     }
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        if (!LibsChecker.checkVitamioLibs(this)) {
-            return;
-        }
 
         String app = getIntent().getStringExtra("app");
 
-        mMediaController = new MediaController(this);
+        jzVideoPlayerStandard.setUp(STREAM_BASE_URL + app + ".m3u8", JZVideoPlayerStandard.SCREEN_WINDOW_NORMAL);
+        JZVideoPlayer.setMediaInterface(new MediaIjkPlayer());
+        jzVideoPlayerStandard.startVideo();
 
-        mVideoView.setVideoPath(STREAM_BASE_URL + app + ".m3u8");
-        mVideoView.setMediaController(mMediaController);
-        mVideoView.start();
+        initViewPager();
+        tabLayout.setupWithViewPager(viewPager);
+    }
 
-        mVideoView.setOnErrorListener(new MediaPlayer.OnErrorListener() {
-            @Override
-            public boolean onError(MediaPlayer mp, int what, int extra) {
-                new AlertDialog.Builder(LiveActivity.this)
-                        .setTitle(getResources().getString(R.string.videoErrTitle))
-                        .setMessage(getResources().getString(R.string.videoErrMsg))
-                        .setPositiveButton(getResources().getString(R.string.videoErrBtn),
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        finish();
-                                    }
-                                }).setCancelable(false).show();
-                return false;
-            }
-        });
+    private void initTabLayout() {
+
+    }
+
+    private void initViewPager() {
+        list = new ArrayList<>();
+        list.add(new ChatroomFragment());
+        list.add(new XingKongFragment());
+        list.add(new PartnerFragment());
+
+        mAdapter = new ViewPagerAdapter(getSupportFragmentManager(),list,titles);
+        viewPager.setAdapter(mAdapter);
     }
 
     @Override
@@ -107,5 +91,24 @@ public class LiveActivity extends BaseActivity<LiveContract.Presenter> implement
     @Override
     protected int getLayoutId() {
         return R.layout.activity_live;
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (JZVideoPlayer.backPress()) {
+            return;
+        }
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JZVideoPlayer.releaseAllVideos();
     }
 }

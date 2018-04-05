@@ -3,4 +3,6 @@
     <string name="videoErrTitle">提示：</string>
     <string name="videoErrMsg">播放失败！</string>
     <string name="videoErrBtn">确定</string>
+    <string name="xingkong">星空学生创新中心</string>
+    <string name="send">发送</string>
 </resources>
