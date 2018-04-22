@@ -53,8 +53,8 @@ public abstract class HttpRunnable implements Runnable {
 
             conn = (HttpURLConnection) (new URL(url).openConnection());
             conn.setDoOutput(true);
-            conn.setConnectTimeout(2000);//设置连接超时
-            conn.setReadTimeout(3000);//设置读取数据超时
+            conn.setConnectTimeout(10000);//设置连接超时
+            conn.setReadTimeout(10000);//设置读取数据超时
 
             conn.setRequestProperty("Cookie", request.getCookie());//将本地Cookie传递给服务器
 

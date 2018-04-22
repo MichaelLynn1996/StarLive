@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group>
+        <item
+            android:id="@+id/my_apps"
+            android:title="@string/my_apps" />
+        <item
+            android:id="@+id/custom_live"
+            android:title="@string/custom_live" />
+
+    </group>
+
+    <item android:title="@string/exit">
+        <menu>
+        <!--<item-->
+            <!--android:id="@+id/exit_login"-->
+            <!--android:title="@string/exit_login" />-->
+
+        <item
+            android:id="@+id/exit_app"
+            android:title="@string/exit_app" />
+        </menu>
+    </item>
+
+
+</menu>

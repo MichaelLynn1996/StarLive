@@ -23,4 +23,8 @@ public class BasePresenterImpl implements BasePresenter {
             mSubscriptions.clear();
         }
     }
+
+    public interface onFinishListener{
+        void onFinish();
+    }
 }

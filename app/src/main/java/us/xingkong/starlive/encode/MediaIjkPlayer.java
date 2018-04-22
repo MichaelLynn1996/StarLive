@@ -1,4 +1,4 @@
-package us.xingkong.starlive;
+package us.xingkong.starlive.encode;
 
 import android.media.AudioManager;
 import android.media.MediaPlayer;

@@ -68,7 +68,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.AppViewHolder>
         holder.appUser.setText(app.getUser());
         holder.appMaintext.setText(app.getMaintext());
 
-        Glide.with(mContext).load("http://live.xingkong.us/screen/" + app.getAppname() + ".png").into(holder.appImg);
+        Glide.with(mContext).load("http://xingkongus.gqt.gcu.edu.cn/screen/" + app.getAppname() + ".png").into(holder.appImg);
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override

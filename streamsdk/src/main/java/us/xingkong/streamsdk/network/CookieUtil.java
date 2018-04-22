@@ -23,4 +23,11 @@ public class CookieUtil {
         SharedPreferences preference = context.getSharedPreferences(ISLOGINED, Context.MODE_PRIVATE);
         return preference.getString(COOKIE, "");
     }
+
+    public static void cleanCookie(Context context) {
+        SharedPreferences preference = context.getSharedPreferences(ISLOGINED, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preference.edit();
+        editor.putString(COOKIE, "");
+        editor.apply();
+    }
 }

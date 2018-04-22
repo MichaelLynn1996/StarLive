@@ -12,6 +12,8 @@ import android.support.v7.widget.Toolbar;
 
 public class StarLiveApplication extends Application {
 
+    private static long exitTime = 0;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -55,5 +57,17 @@ public class StarLiveApplication extends Application {
 
             }
         });
+    }
+
+    /**
+     * 退出APP
+     */
+    public static void exitApp() {
+        if (System.currentTimeMillis() - exitTime > 2000) {
+//            ToastUtils.shortToast(getAppContext(), appContext.getString(R.string.text_press_again));
+            exitTime = System.currentTimeMillis();
+        } else {
+            android.os.Process.killProcess(android.os.Process.myPid());
+        }
     }
 }

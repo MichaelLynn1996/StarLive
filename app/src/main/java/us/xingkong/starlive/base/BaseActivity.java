@@ -1,5 +1,7 @@
 package us.xingkong.starlive.base;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -55,5 +57,20 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
             mPresenter.unsubscribe();
         }
         super.onDestroy();
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
+    }
+
+    @Override
+    public void setPresenter(P presenter) {
+
+    }
+
+    @Override
+    public Activity getActivity() {
+        return this;
     }
 }

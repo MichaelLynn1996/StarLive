@@ -17,10 +17,13 @@ import cn.jzvd.JZVideoPlayerStandard;
 import master.flame.danmaku.danmaku.model.android.DanmakuContext;
 import master.flame.danmaku.danmaku.parser.BaseDanmakuParser;
 import master.flame.danmaku.ui.widget.DanmakuView;
-import us.xingkong.starlive.MediaIjkPlayer;
+import us.xingkong.starlive.encode.MediaIjkPlayer;
 import us.xingkong.starlive.R;
 import us.xingkong.starlive.adapter.ViewPagerAdapter;
 import us.xingkong.starlive.base.BaseActivity;
+import us.xingkong.starlive.module.live.fragments.ChatroomFragment;
+import us.xingkong.starlive.module.live.fragments.PartnerFragment;
+import us.xingkong.starlive.module.live.fragments.XingKongFragment;
 
 /**
  * Created by SeaLynn0 on 2018/3/27.
@@ -45,16 +48,12 @@ public class LiveActivity extends BaseActivity<LiveContract.Presenter> implement
     private HashMap<Integer, Integer> maxLinesPair;// 弹幕最大行数
     private HashMap<Integer, Boolean> overlappingEnablePair;// 设置是否重叠
 
-    private static final String STREAM_BASE_URL = "http://live.xingkong.us/hls/";
+    private static final String STREAM_BASE_URL = "http://xingkongus.gqt.gcu.edu.cn/hls/";
     private static final String TAG = "LiveActivity";
 
     private List<Fragment> list;
     private ViewPagerAdapter mAdapter;
     private String[] titles = {"聊天室", "星空", "合作方"};
-
-    @Override
-    public void setPresenter(LiveContract.Presenter presenter) {
-    }
 
     @Override
     protected void init(Bundle savedInstanceState) {

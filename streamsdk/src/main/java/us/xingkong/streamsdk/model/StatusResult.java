@@ -19,7 +19,7 @@ public class StatusResult extends Result {
 
     private UserInfo userinfo;
 
-    public StatusResult(){
+    private StatusResult(){
         super();
     }
 
@@ -39,7 +39,15 @@ public class StatusResult extends Result {
 
     }
 
-    class UserInfo {
+    public UserInfo getUserinfo() {
+        return userinfo;
+    }
+
+    public void setUserinfo(UserInfo userinfo) {
+        this.userinfo = userinfo;
+    }
+
+    public class UserInfo {
 
         private String username;
 

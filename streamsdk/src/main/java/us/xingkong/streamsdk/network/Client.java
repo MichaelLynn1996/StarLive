@@ -5,6 +5,8 @@ import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 
+import org.json.JSONException;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Executors;
@@ -29,7 +31,8 @@ public class Client {
     /**
      * 默认API的URL接口
      */
-    private static final String API_HOST_DEFAULT = "http://live.xingkong.us/?s=/index/user/";
+//    private static final String API_HOST_DEFAULT = "http://live.xingkong.us/?s=/index/user/";
+    private static final String API_HOST_DEFAULT = "http://xingkongus.gqt.gcu.edu.cn/?s=/index/user/";
 
     /**
      * 接口方法数组
@@ -64,6 +67,10 @@ public class Client {
      * @param username 用户名
      * @param password 密码
      * @param listener 回调监听器
+     *                 <p>
+     *                 status : 状态码
+     *                 200 : 成功
+     *                 100 : 失败
      */
     public void login(String username, String password, final ResultListener<Result> listener) {
 
@@ -84,15 +91,15 @@ public class Client {
 
                         //本run方法已经处于UI线程，故可以触发onDone方法后，onDone方法的UI操作不会受影响
                         if (e != null) {
-                            listener.onDone(null, e);
+                            listener.onError(e);
                         } else {
                             try {
-                                listener.onDone(new Result(result), null);
-                            } catch (Exception e1) {
-                                listener.onDone(null, e1);
+                                listener.onFinish(new Result(result));
+                            } catch (JSONException e1) {
+                                e1.printStackTrace();
                             }
                         }
-
+                        listener.onFinal();
                     }
 
                 });
@@ -125,14 +132,15 @@ public class Client {
                     @Override
                     public void run() {
                         if (e != null) {
-                            listener.onDone(null, e);
+                            listener.onError(e);
                         } else {
                             try {
-                                listener.onDone(new Result(result), null);
-                            } catch (Exception e1) {
-                                listener.onDone(null, e1);
+                                listener.onFinish(new Result(result));
+                            } catch (JSONException e1) {
+                                e1.printStackTrace();
                             }
                         }
+                        listener.onFinal();
                     }
                 });
 
@@ -156,14 +164,15 @@ public class Client {
                     @Override
                     public void run() {
                         if (e != null) {
-                            listener.onDone(null, e);
+                            listener.onError(e);
                         } else {
                             try {
-                                listener.onDone(new StatusResult(result), null);
-                            } catch (Exception e1) {
-                                listener.onDone(null, e1);
+                                listener.onFinish(new StatusResult(result));
+                            } catch (JSONException e1) {
+                                e1.printStackTrace();
                             }
                         }
+                        listener.onFinal();
                     }
                 });
             }
@@ -187,14 +196,15 @@ public class Client {
                     @Override
                     public void run() {
                         if (e != null) {
-                            listener.onDone(null, e);
+                            listener.onError(e);
                         } else {
                             try {
-                                listener.onDone(new StatusResult(result), null);
-                            } catch (Exception e1) {
-                                listener.onDone(null, e1);
+                                listener.onFinish(new StatusResult(result));
+                            } catch (JSONException e1) {
+                                e1.printStackTrace();
                             }
                         }
+                        listener.onFinal();
                     }
                 });
             }
@@ -217,15 +227,15 @@ public class Client {
                     public void run() {
 
                         if (e != null) {
-                            listener.onDone(null, e);
+                            listener.onError(e);
                         } else {
                             try {
-                                listener.onDone(new AppsResult(result), null);
-                            } catch (Exception e1) {
-                                listener.onDone(null, e1);
+                                listener.onFinish(new AppsResult(result));
+                            } catch (JSONException e1) {
+                                e1.printStackTrace();
                             }
                         }
-
+                        listener.onFinal();
                     }
                 });
             }
@@ -249,15 +259,15 @@ public class Client {
                     public void run() {
 
                         if (e != null) {
-                            listener.onDone(null, e);
+                            listener.onError(e);
                         } else {
                             try {
-                                listener.onDone(new AppsResult(result), null);
-                            } catch (Exception e1) {
-                                listener.onDone(null, e1);
+                                listener.onFinish(new AppsResult(result));
+                            } catch (JSONException e1) {
+                                e1.printStackTrace();
                             }
                         }
-
+                        listener.onFinal();
                     }
                 });
             }
@@ -282,14 +292,15 @@ public class Client {
                     @Override
                     public void run() {
                         if (e != null) {
-                            listener.onDone(null, e);
+                            listener.onError(e);
                         } else {
                             try {
-                                listener.onDone(new GetAppResult(result), null);
-                            } catch (Exception e1) {
-                                listener.onDone(null, e1);
+                                listener.onFinish(new GetAppResult(result));
+                            } catch (JSONException e1) {
+                                e1.printStackTrace();
                             }
                         }
+                        listener.onFinal();
 
                     }
                 });
@@ -318,14 +329,15 @@ public class Client {
                     @Override
                     public void run() {
                         if (e != null) {
-                            listener.onDone(null, e);
+                            listener.onError(e);
                         } else {
                             try {
-                                listener.onDone(new StatusResult(result), null);
-                            } catch (Exception e1) {
-                                listener.onDone(null, e1);
+                                listener.onFinish(new StatusResult(result));
+                            } catch (JSONException e1) {
+                                e1.printStackTrace();
                             }
                         }
+                        listener.onFinal();
                     }
                 });
             }
@@ -355,19 +367,24 @@ public class Client {
                     @Override
                     public void run() {
                         if (e != null) {
-                            listener.onDone(null, e);
+                            listener.onError(e);
                         } else {
                             try {
-                                listener.onDone(new StatusResult(result), null);
-                            } catch (Exception e1) {
-                                listener.onDone(null, e1);
+                                listener.onFinish(new StatusResult(result));
+                            } catch (JSONException e1) {
+                                e1.printStackTrace();
                             }
                         }
+                        listener.onFinal();
                     }
                 });
             }
         };
         pool.execute(hr);
+    }
+
+    public void logout(){
+        CookieUtil.cleanCookie(context);
     }
 
 }

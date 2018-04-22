@@ -11,7 +11,7 @@ public class LivePresenter extends BasePresenterImpl implements LiveContract.Pre
 
     private LiveContract.View mView;
 
-    LivePresenter(LiveContract.View view) {
+    public LivePresenter(LiveContract.View view) {
         mView = view;
         this.mView.setPresenter(this);
     }

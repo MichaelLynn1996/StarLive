@@ -1,8 +1,29 @@
 <resources>
-    <string name="app_name">StarLive</string>
+    <string name="app_name">星空直播</string>
     <string name="videoErrTitle">提示：</string>
     <string name="videoErrMsg">播放失败！</string>
     <string name="videoErrBtn">确定</string>
     <string name="xingkong">星空学生创新中心</string>
     <string name="send">发送</string>
+    <string name="signin">注册</string>
+    <string name="login">登陆</string>
+    <string name="pls_ent_code">请输入密码</string>
+    <string name="pls_ent_acc">请输入账号</string>
+    <string name="star_live">星空直播</string>
+    <string name="my_apps">我的直播</string>
+    <string name="pls_press_to_login">请点击登陆！</string>
+    <string name="confirm_exit_login">确认退出登陆</string>
+    <string name="exit">退出</string>
+    <string name="exit_app">退出程序</string>
+    <string name="custom_live">自定义直播</string>
+    <string name="upload_address">Upload Address</string>
+    <string name="need_permission">直播需要相机以及录音权限！</string>
+    <string name="update">更新</string>
+    <item name="pls_ent_rtmp_address" type="id">请填写推流地址：</item>
+    <string name="pls_ent_maintext">请输入直播描述</string>
+    <string name="pls_ent_title">请输入直播标题</string>
+    <string name="update_app">更新直播</string>
+    <string name="create">创建</string>
+    <string name="pls_ent_appname">请输入直播名！</string>
+    <string name="create_app">创建直播</string>
 </resources>
