@@ -16,7 +16,7 @@ class MyAppsPresenter extends BasePresenterImpl implements MyAppsContract.Presen
 
     MyAppsContract.View mView;
 
-    MyAppsPresenter(MyAppsContract.View view){
+    MyAppsPresenter(MyAppsContract.View view) {
         mView = view;
         mView.setPresenter(this);
     }
@@ -36,7 +36,8 @@ class MyAppsPresenter extends BasePresenterImpl implements MyAppsContract.Presen
 
             @Override
             public void onFinal() {
-                mView.stopRefreshing();
+                if (!mView.getActivity().isDestroyed())
+                    mView.stopRefreshing();
             }
         });
     }

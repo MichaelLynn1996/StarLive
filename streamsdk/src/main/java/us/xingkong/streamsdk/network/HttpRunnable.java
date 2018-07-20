@@ -1,9 +1,13 @@
 package us.xingkong.streamsdk.network;
 
+import android.util.Log;
+
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by 饶翰新 on 2017/12/20.
@@ -53,13 +57,13 @@ public abstract class HttpRunnable implements Runnable {
 
             conn = (HttpURLConnection) (new URL(url).openConnection());
             conn.setDoOutput(true);
-            conn.setConnectTimeout(10000);//设置连接超时
-            conn.setReadTimeout(10000);//设置读取数据超时
+            conn.setConnectTimeout(100000);//设置连接超时
+            conn.setReadTimeout(100000);//设置读取数据超时
 
             conn.setRequestProperty("Cookie", request.getCookie());//将本地Cookie传递给服务器
 
             conn.getOutputStream().write(request.parsePOST().getBytes());//将POST传递给服务器
-            conn.getOutputStream().flush();
+//            conn.getOutputStream().flush();
             conn.getOutputStream().close();
 
             ByteArrayOutputStream out = new ByteArrayOutputStream();

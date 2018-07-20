@@ -1,7 +1,5 @@
 package us.xingkong.starlive.module.login;
 
-import android.app.Activity;
-import android.util.Log;
 import android.widget.Toast;
 
 import us.xingkong.starlive.base.BasePresenterImpl;

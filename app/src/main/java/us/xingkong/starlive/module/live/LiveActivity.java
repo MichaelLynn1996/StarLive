@@ -68,10 +68,6 @@ public class LiveActivity extends BaseActivity<LiveContract.Presenter> implement
         tabLayout.setupWithViewPager(viewPager);
     }
 
-    private void initTabLayout() {
-
-    }
-
     private void initViewPager() {
         list = new ArrayList<>();
         list.add(new ChatroomFragment());
